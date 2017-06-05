@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Calorie Counter</title>
+  <link rel="stylesheet" th:href="@{/style.css}" />
+  <meta charset="utf-8" />
+</head>
+<body>
+  <h1>Add or Edit Meal</h1>
+
+    <table>
+      <tr>
+        <th></th>
+        <th>DATE</th>
+        <th>TYPE</th>
+        <th>DESCRIPTION</th>
+        <th>CALORIES</th>
+      </tr>
+
+      <tr th:each="meal : ${meals}">
+        <form th:action="@{/edit}" th:method="PUT">
+        <td><input th:type="hidden" th:value="${meal.id}" name="id"> </input></td>
+        <td><input th:type="date" th:value="${meal.date}" th:name="date" required="required"> </input></td>
+          <td>
+            <select th:name="type">
+              <option th:each="type : ${types}"
+                      th:value="${type.getDescription()}"
+                      th:text="${type.getDescription()}"
+                      th:selected="${type.getDescription()} == ${meal.type}">
+              </option>
+            </select>
+          </td>
+        <td><input th:type="text" th:value="${meal.description}" th:name="description"> </input> </td>
+        <td><input th:type="number" th:value="${meal.calories}" th:name="calories" required="required"> </input> </td>
+        <td><button type="submit" value="submit">Edit</button> </td>
+        </form>
+        <td>
+          <form th:action="@{/delete}" th:method="DELETE">
+            <button type="submit" name = "id" th:value="${meal.id}">delete</button>
+          </form>
+        </td>
+      </tr>
+
+      <tr>
+        <form th:action="@{/add}" th:method="POST">
+          <td><input th:type="hidden" th:name="id"> </input></td>
+          <td><input th:type="date" th:name="date" required="required"> </input></td>
+          <td>
+            <select th:name="type">
+              <option th:each="type : ${types}"
+                      th:value="${type.getDescription()}"
+                      th:text="${type.getDescription()}">
+              </option>
+            </select>
+          </td>
+          <td><input th:type="text" th:name="description"> </input> </td>
+          <td><input th:type="number" th:name="calories" required="required"> </input> </td>
+          <td><button type="submit" value="Submit">Add</button> </td>
+        </form>
+        <td><a th:href="@{/}">Cancel</a></td>
+      </tr>
+
+    </table>
+
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Calorie Counter</title>
+  <link rel="stylesheet" th:href="@{/style.css}" />
+  <meta charset="utf-8" />
+</head>
+<body>
+  <h1>Calorie Counter</h1>
+  <p>Number of meals: <span th:text="${statistics.numberOfMeals}"></span></p>
+  <p>Total calories: <span th:text="${statistics.calories}"></span></p>
+  <a href="/addoredit">Add new meal</a>
+
+    <table>
+      <tr>
+        <th>DATE</th>
+        <th>TYPE</th>
+        <th>DESCRIPTION</th>
+        <th>CALORIES</th>
+      </tr>
+      <tr th:each="meal : ${meals}">
+        <td th:text="${meal.date}"></td>
+        <td th:text="${meal.type}"></td>
+        <td th:text="${meal.description}"></td>
+        <td th:text="${meal.calories}"></td>
+      </tr>
+    </table>
+
+</body>
+</html>
