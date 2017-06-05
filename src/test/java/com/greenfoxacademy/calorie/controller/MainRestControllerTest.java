@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppC
 
 
 @RunWith(SpringRunner.class)
-@SpringBootTest(classes = MainRestController.class)
+@SpringBootTest(classes = CaloriecounterApplication.class)
 @WebAppConfiguration
 @EnableWebMvc
 public class MainRestControllerTest {
